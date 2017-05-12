@@ -3,10 +3,19 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
+var session = require('client-sessions');
 var home = require('./routes/home');
 var posts = require('./routes/posts');
 
 var app = express();
+
+app.use(session({
+
+	cookieName : 'session',
+	secret : 'cmpe273_test_string',
+	duration : 30 * 60 * 1000, // setting the time for active session
+	activeDuration : 5 * 60 * 1000,
+}));
 
 // all environments
 app.set('port', process.env.PORT || 3000);

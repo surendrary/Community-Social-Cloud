@@ -23,7 +23,7 @@ function afterSignIn(req,res)
 
 	var loginAs= req.param("inputLoginAs");
 	var getUser;
-	if(loginAs == 0 || loginAs == 1)
+	if(loginAs == 0 || loginAs == 2)
 	{
 		getUser="select * from users where username='"+req.param("inputUsername")+"' and password='" + req.param("inputPassword") +"'and userType ='" + req.param("inputLoginAs") +"'";
 
