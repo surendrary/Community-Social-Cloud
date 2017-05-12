@@ -31,7 +31,7 @@ function afterSignIn(req,res)
 		{
 			if(results.length > 0){
 				console.log("valid Login");
-				res.render("Userhomepage");
+				res.render("moderatorHomepage");
 			}
 			else {    
 				
