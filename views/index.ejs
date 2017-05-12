@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link rel='stylesheet' href='/stylesheets/login.css' />
+  <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</head>
+<body>
+<div class="form">
+
+
+<h1 class="heading1">WeMedUp Community</h1>
+    <ul class="tab-group">
+      <li class="tab active"><a data-toggle="pill" href="#login">Log In</a></li>
+      <li class="tab"><a data-toggle="pill" href="#signup">Sign Up</a></li>
+    </ul>
+  <div class="tab-content">
+    <div id="login">
+      <form action="/afterSignIn" method="post">
+        <div class="field-wrap">
+          <select id="loginAs" required>
+            <option value="">Login As</option>
+            <option value="client">Client</option>
+            <option value="moderator">Moderator</option>
+          </select>
+        </div>
+
+        <div class="field-wrap">
+         <input type="email"required autocomplete="off" name="inputUsername" id="inputUsername" placeholder="Email Address*"/>
+        </div>
+
+        <div class="field-wrap">
+         <input type="password"required autocomplete="off" name="inputPassword" id="inputPassword" placeholder="Password*"/>
+        </div>
+
+        <div class="field-wrap">
+          <input type="text" autocomplete="off" name="inputEmployeeId" id="inputEmployeeId" placeholder="Employee Id*"/>
+        </div>
+
+        <p class="forgot"><a href="#">Forgot Password?</a></p>
+        <button class="button button-block"/>Log In</button>
+
+      </form>
+
+    </div>
+
+    <div id="signup">
+      <form action="/afterRegister" method="post">
+
+        <div class="top-row">
+          <div class="field-wrap">
+            <input type="text" required autocomplete="off" name="firstname" id="firstname" placeholder="First Name*" />
+          </div>
+
+          <div class="field-wrap">
+            <input type="text"required autocomplete="off" name="lastname" id="lastname" placeholder="Last Name*"/>
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <input type="email"required autocomplete="off" name="username" id="username" placeholder="Email Address*"/>
+        </div>
+
+        <div class="field-wrap">
+          <input type="password"required autocomplete="off" name="password" id="password" placeholder="Set a Password*"/>
+        </div>
+
+
+        <button type="submit" class="button button-block"/>Register for Membership</button>
+
+      </form>
+
+    </div>
+
+
+
+  </div><!-- tab-content -->
+
+</div> <!-- /form -->
+</body>
+
+<script>
+
+
+  $(document).ready(function () {
+    toggleFields(); //call this first so we start out with the correct visibility depending on the selected form values
+    //this will call our toggleFields function every time the selection value of our underAge field changes
+    $("#loginAs").change(function () {
+      toggleFields();
+    });
+
+  });
+  //this toggles the visibility of our parent permission fields depending on the current selected value of the underAge field
+  function toggleFields() {
+    if ($("#loginAs").val() == "moderator") {
+      $("#inputEmployeeId").show();
+      $("#inputEmployeeId").prop('required',true);
+    }
+    else {
+      $("#inputEmployeeId").hide();
+      $("#inputEmployeeId").prop('required',false);
+    }
+  }
+
+  $('.tab a').on('click', function (e) {
+
+    e.preventDefault();
+
+    $(this).parent().addClass('active');
+    $(this).parent().siblings().removeClass('active');
+
+    target = $(this).attr('href');
+
+    $('.tab-content > div').not(target).hide();
+
+    $(target).fadeIn(600);
+
+  });
+
+</script>
+</html>
