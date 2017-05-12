@@ -3,7 +3,7 @@ var mysql = require('./mysql');
 
 function addPost(req, res){
 	if(req.session.username){
-		var insertPost = "insert into posts (description) values ('"+ req.param('post') +"')";
+		var insertPost = "insert into posts (description, moderator, postTime) values ('"+ req.param('post') +"', " + req.session.userId +", now())";
 		mysql.fetchData(function(err,results){
 			if(err){
 				throw err;
@@ -13,7 +13,7 @@ function addPost(req, res){
 				var json_responses = {
 					"statusCode" : 200
 				}
-				res.send(json_responses);
+				res.render("moderatorHomepage");
 			}
 		},insertPost);
 	}

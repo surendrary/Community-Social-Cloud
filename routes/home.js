@@ -45,6 +45,7 @@ function afterSignIn(req,res)
 			if(results.length > 0){
 				console.log("valid Login");
 				req.session.username = results[0].username;
+				req.session.userId = results[0].userId;
 				if(req.param("inputLoginAs") == 2) {
 					res.render("Userhomepage");
 				}
