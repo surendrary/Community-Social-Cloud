@@ -760,7 +760,11 @@ hr.bold {
 }
 
 .intro-content {
-	background: url(/imgages/bg.jpg) no-repeat top center;
+	background: url(/images/bg1.jpg) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 	padding:100px 0 20px;
 }
 .intro-content.intro-nobg {
@@ -773,6 +777,16 @@ hr.bold {
 
     margin-left: 2px !important;
     padding-left: 0px !important;
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+
+}
+@media (min-width: 1200px)
+{
+    .container{
+        max-width: 185%;
+    }
+
 }
 
 
@@ -2196,3 +2210,4 @@ a.btn:focus{
 .post .post-footer .comments-list .comment > .comments-list {
     margin-left: 50px;
 }
+
