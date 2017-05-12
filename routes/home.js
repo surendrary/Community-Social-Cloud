@@ -31,6 +31,7 @@ function afterSignIn(req,res)
 		{
 			if(results.length > 0){
 				console.log("valid Login");
+				req.session.username = results[0].username;
 				res.render("moderatorHomepage");
 			}
 			else {    
@@ -56,48 +57,49 @@ function getAllUsers(req,res)
 {
 	var getAllUsers = "select * from users";
 	console.log("Query is:"+getAllUsers);
-	
-	mysql.fetchData(function(err,results){
-		if(err){
-			throw err;
-		}
-		else 
-		{
-			if(results.length > 0){
-				
-				var rows = results;
-				var jsonString = JSON.stringify(results);
-				var jsonParse = JSON.parse(jsonString);
+	if(req.session.username){
+		mysql.fetchData(function(err,results){
+			if(err){
+				throw err;
+			}
+			else 
+			{
+				if(results.length > 0){
+					
+					var rows = results;
+					var jsonString = JSON.stringify(results);
+					var jsonParse = JSON.parse(jsonString);
 
-				ejs.renderFile('./views/successLogin.ejs',{data:jsonParse},function(err, result) {
-			        // render on success
-			        if (!err) {
-			            res.end(result);
-			        }
-			        // render or error
-			        else {
-			            res.end('An error occurred');
-			            console.log(err);
-			        }
-			    });
-			}
-			else {    
-				
-				console.log("No users found in database");
-				ejs.renderFile('./views/failLogin.ejs',function(err, result) {
-			        // render on success
-			        if (!err) {
-			            res.end(result);
-			        }
-			        // render or error
-			        else {
-			            res.end('An error occurred');
-			            console.log(err);
-			        }
-			    });
-			}
-		}  
-	},getAllUsers);
+					ejs.renderFile('./views/successLogin.ejs',{data:jsonParse},function(err, result) {
+				        // render on success
+				        if (!err) {
+				            res.end(result);
+				        }
+				        // render or error
+				        else {
+				            res.end('An error occurred');
+				            console.log(err);
+				        }
+				    });
+				}
+				else {    
+					
+					console.log("No users found in database");
+					ejs.renderFile('./views/failLogin.ejs',function(err, result) {
+				        // render on success
+				        if (!err) {
+				            res.end(result);
+				        }
+				        // render or error
+				        else {
+				            res.end('An error occurred');
+				            console.log(err);
+				        }
+				    });
+				}
+			}  
+		},getAllUsers);
+	}
 }
 
 
