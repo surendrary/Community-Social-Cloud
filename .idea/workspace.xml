@@ -33,17 +33,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Userhomepage.ejs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Userhomepage.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/Userhomepage.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="34" column="36" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="36" />
-              <folding />
+            <state relative-caret-position="330">
+              <caret line="164" column="8" selection-start-line="164" selection-start-column="8" selection-end-line="164" selection-end-column="8" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="311">
@@ -86,8 +89,8 @@
         <option value="$PROJECT_DIR$/views/index.ejs" />
         <option value="$PROJECT_DIR$/public/stylesheets/login.css" />
         <option value="$PROJECT_DIR$/routes/home.js" />
-        <option value="$PROJECT_DIR$/views/Userhomepage.ejs" />
         <option value="$PROJECT_DIR$/public/css/style.css" />
+        <option value="$PROJECT_DIR$/views/Userhomepage.ejs" />
       </list>
     </option>
   </component>
@@ -326,12 +329,12 @@
       <workItem from="1494489934047" duration="667000" />
       <workItem from="1494490786261" duration="4777000" />
       <workItem from="1494496928161" duration="9962000" />
-      <workItem from="1494549487436" duration="3105000" />
+      <workItem from="1494549487436" duration="5381000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21841000" />
+    <option name="totallyTimeSpent" value="24117000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -692,19 +695,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/Userhomepage.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="34" column="36" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
           <caret line="786" column="22" selection-start-line="786" selection-start-column="22" selection-end-line="786" selection-end-column="22" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/Userhomepage.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="164" column="8" selection-start-line="164" selection-start-column="8" selection-end-line="164" selection-end-column="8" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
