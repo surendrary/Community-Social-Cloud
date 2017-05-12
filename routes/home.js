@@ -19,9 +19,22 @@ function signin(req,res) {
 
 function afterSignIn(req,res)
 {
-	// check user already exists
-	var getUser="select * from users where username='"+req.param("inputUsername")+"' and password='" + req.param("inputPassword") +"'";
-	console.log("Query is:"+getUser);
+
+
+	var loginAs= req.param("inputLoginAs");
+	var getUser;
+	if(loginAs == 0 || loginAs == 1)
+	{
+		getUser="select * from users where username='"+req.param("inputUsername")+"' and password='" + req.param("inputPassword") +"'and userType ='" + req.param("inputLoginAs") +"'";
+
+	}
+	else
+	{
+		getUser = "select * from users where username='"+req.param("inputUsername")+"' and password='" + req.param("inputPassword") +"'and empId ='" + req.param("inputEmployeeId") +"'"
+
+	}
+
+		console.log("Query is:"+getUser);
 	
 	mysql.fetchData(function(err,results){
 		if(err){
@@ -31,12 +44,19 @@ function afterSignIn(req,res)
 		{
 			if(results.length > 0){
 				console.log("valid Login");
+				if(req.param("inputLoginAs") == 2) {
+					res.render("Userhomepage");
+				}
+				else if(req.param("inputLoginAs") == 1)
 				res.render("moderatorHomepage");
+				else
+					res.render("failLogin");
+
 			}
 			else {    
 				
 				console.log("Invalid Login");
-				ejs.renderFile('./views/failLogin.ejs',function(err, result) {
+				ejs.renderFile('./views/index.ejs',function(err, result) {
 			        // render on success
 			        if (!err) {
 			            res.end(result);

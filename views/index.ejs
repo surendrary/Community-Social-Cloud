@@ -21,11 +21,11 @@
     <div id="login">
       <form action="/afterSignIn" method="post">
         <div class="field-wrap">
-          <select id="loginAs" required>
+          <select id="loginAs" name="inputLoginAs" required>
             <option value="">Login As</option>
-            <option value="client">Client</option>
-            <option value="moderator">Moderator</option>
-            <option value="moderator">Administrator</option>
+            <option value="2">Client</option>
+            <option value="1">Moderator</option>
+            <option value="0">Administrator</option>
           </select>
         </div>
 
@@ -96,7 +96,7 @@
   });
   //this toggles the visibility of our parent permission fields depending on the current selected value of the underAge field
   function toggleFields() {
-    if ($("#loginAs").val() == "moderator") {
+    if ($("#loginAs").val() == "1") {
       $("#inputEmployeeId").show();
       $("#inputEmployeeId").prop('required',true);
     }
