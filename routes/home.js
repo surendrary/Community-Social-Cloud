@@ -34,7 +34,7 @@ function afterSignIn(req,res)
 
 	}
 
-		console.log("Query is:"+getUser);
+	console.log("Query is:"+getUser);
 	
 	mysql.fetchData(function(err,results){
 		if(err){
@@ -46,34 +46,80 @@ function afterSignIn(req,res)
 				console.log("valid Login");
 				req.session.username = results[0].username;
 				req.session.userId = results[0].userId;
-				if(req.param("inputLoginAs") == 2) {
-					res.render("Userhomepage");
-				}
-				else if(req.param("inputLoginAs") == 1)
-					res.render("moderatorHomepage");
-				else
-					res.render("failLogin");
-
-			}
-			else {    
-				
-				console.log("Invalid Login");
-				ejs.renderFile('./views/index.ejs',function(err, result) {
-			        // render on success
-			        if (!err) {
-			            res.end(result);
-			        }
-			        // render or error
-			        else {
-			            res.end('An error occurred');
-			            console.log(err);
-			        }
-			    });
-			}
-		}  
-	},getUser);
+					//**********************************************8
+					var getPosts ="SELECT ID, posts.Description, GROUP_CONCAT(Comment) AS comments FROM posts LEFT JOIN comments ON posts.ID = comments.postId GROUP BY ID";
+					console.log("Query is:"+getUser);
+					mysql.fetchData(function(err,results){
+						if(err){
+							throw err;
+						}
+						else 
+						{
+							var rows = results;
+							console.log("rows");
+							var jsonString = JSON.stringify(results);
+							var jsonParse = JSON.parse(jsonString);
+							
+							if(results.length > 0){
+								console.log("valid Login");
+								//res.render("Userhomepage");
+								console.log(jsonParse);
+								if(req.param("inputLoginAs") == 2) {
+								ejs.renderFile('./views/Userhomepage.ejs',{data:jsonParse},function(err, result) {
+							        // render on success
+							        if (!err) {
+							            res.end(result);
+							        }
+							        // render or error
+							        else {
+							            res.end('An error occurred');
+							            console.log(err);
+							        }
+								});
+							}
+							else if(req.param("inputLoginAs") == 1)
+							{
+								ejs.renderFile('./views/moderatorHomepage.ejs',{data:jsonParse},function(err, result) {
+							        // render on success
+							        if (!err) {
+							            res.end(result);
+							        }
+							        // render or error
+							        else {
+							            res.end('An error occurred');
+							            console.log(err);
+							        }
+								});	
+							}
+						}
+							else{
+								res.render("failLogin");
+							}
+						}		
+							
+						},getPosts);
+					}
+					else {    
+			
+						console.log("Invalid Login");
+						ejs.renderFile('./views/index.ejs',function(err, result) {
+					        // render on success
+					        if (!err) {
+					            res.end(result);
+					        }
+					        // render or error
+					        else {
+					            res.end('An error occurred');
+					            console.log(err);
+					        }
+					    });
+					 }
+		}
+						
+		},getUser);	
 }
-
+			
+				
 function getAllUsers(req,res)
 {
 	var getAllUsers = "select * from users";
