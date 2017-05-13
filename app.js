@@ -43,7 +43,8 @@ app.post('/afterSignIn', home.afterSignIn);
 app.get('/getAllUsers', home.getAllUsers);
 app.post('/addPost', posts.addPost);
 app.post('/addComment', posts.addComment);
-
+app.get('/getPosts',posts.getPosts);
+	
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
