@@ -40,7 +40,6 @@ app.get('/', home.signin);
 app.post('/afterRegister', home.afterRegister);
 app.get('/signin', home.signin);
 app.post('/afterSignIn', home.afterSignIn);
-app.get('/getAllUsers', home.getAllUsers);
 app.post('/addPost', posts.addPost);
 app.post('/addComment', posts.addComment);
 app.get('/getPosts',posts.getPosts);

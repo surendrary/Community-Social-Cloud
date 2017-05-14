@@ -91,6 +91,10 @@ function afterSignIn(req,res)
 							        }
 								});	
 							}
+							else
+                                {
+                                    res.render("adminHomepage");
+                                }
 						}
 							else{
 								res.render("failLogin");
@@ -119,70 +123,39 @@ function afterSignIn(req,res)
 		},getUser);	
 }
 			
-				
-function getAllUsers(req,res)
-{
-	var getAllUsers = "select * from users";
-	console.log("Query is:"+getAllUsers);
-	if(req.session.username){
-		mysql.fetchData(function(err,results){
-			if(err){
-				throw err;
-			}
-			else 
-			{
-				if(results.length > 0){
-					
-					var rows = results;
-					var jsonString = JSON.stringify(results);
-					var jsonParse = JSON.parse(jsonString);
-
-					ejs.renderFile('./views/successLogin.ejs',{data:jsonParse},function(err, result) {
-				        // render on success
-				        if (!err) {
-				            res.end(result);
-				        }
-				        // render or error
-				        else {
-				            res.end('An error occurred');
-				            console.log(err);
-				        }
-				    });
-				}
-				else {    
-					
-					console.log("No users found in database");
-					ejs.renderFile('./views/failLogin.ejs',function(err, result) {
-				        // render on success
-				        if (!err) {
-				            res.end(result);
-				        }
-				        // render or error
-				        else {
-				            res.end('An error occurred');
-				            console.log(err);
-				        }
-				    });
-				}
-			}  
-		},getAllUsers);
-	}
-}
 
 
 function afterRegister(req,res)
 {
 	var json_responses;
-	var registerUser="insert into users(username,password,firstname,lastname,usertype) values('"+req.param("username")+"','"+req.param("password")+"','"+req.param("firstname")+"','"+req.param("lastname")+"',2)";
-	mysql.fetchData(function(err,results){
-		if(err){
+	var registerUser;
+	if(req.param("empId") !=null)
+	{
+		registerUser="insert into users(username,password,firstname,lastname,usertype,empId) values('"+req.param("username")+"','"+req.param("password")+"','"+req.param("firstname")+"','"+req.param("lastname")+"',1,'"+req.param("empId")+"')";
+
+	}
+	else {
+		registerUser="insert into users(username,password,firstname,lastname,usertype) values('"+req.param("username")+"','"+req.param("password")+"','"+req.param("firstname")+"','"+req.param("lastname")+"',2)";
+
+	}
+		mysql.fetchData(function(err,results){
+		if(err)
+		{
 
 			json_responses = {"statusCode" : 401};
 			res.send(json_responses);
 		}
-		else {
+		else
+		{
 
-			res.render("index");
+			if(req.param("empId") !=null)
+			{
+				res.render("adminHomepage");
+			}
+			else {
+				res.render("index");
+			}
+
 
 
 		}
@@ -203,4 +176,3 @@ function afterRegister(req,res)
 exports.afterRegister=afterRegister;
 exports.signin=signin;
 exports.afterSignIn=afterSignIn;
-exports.getAllUsers=getAllUsers;
