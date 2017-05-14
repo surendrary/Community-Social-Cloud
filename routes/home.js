@@ -165,6 +165,41 @@ function afterRegister(req,res)
 
 
 
+function getModerators(req,res)
+{
+	var getModerator = "select * from users where userType = 1"
+	console.log("Query is:"+getModerator);
+	mysql.fetchData(function(err,results){
+		if(err){
+			throw err;
+		}
+		else
+		{
+			if(results.length > 0)
+			{
+				var rows = results;
+				console.log("rows");
+				var jsonString = JSON.stringify(results);
+				var jsonParse = JSON.parse(jsonString);
+				console.log(jsonParse);
+				res.send(jsonParse);
+				/*ejs.renderFile('./views/adminHomepage.ejs',{data:jsonParse},function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});*/
+
+			}
+		}
+
+	},getModerator);
+}
 
 
 
@@ -173,6 +208,7 @@ function afterRegister(req,res)
 
 
 
+exports.getModerators= getModerators;
 exports.afterRegister=afterRegister;
 exports.signin=signin;
 exports.afterSignIn=afterSignIn;
