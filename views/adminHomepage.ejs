@@ -60,6 +60,10 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                     <h5>Welcome, Love to see you back. </h5>
                 </div>
             </div>
+            
+            
+      
+            
             <!-- /. ROW  -->
             <hr />
             <div class="row">
@@ -144,12 +148,6 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                     </div>
 
                 </div>
-
-
-
-
-
-
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-green set-icon">
@@ -184,12 +182,6 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                 </div>
 
 
-
-
-
-
-
-
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-blue set-icon">
@@ -201,19 +193,26 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                         </div>
                     </div>
                 </div>
+           
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-brown set-icon">
                     <i class="fa fa-envelope-o"></i>
                 </span>
-                        <div class="text-box" >
+                        <div class="text-box">
                             <p class="main-text">RECENT POSTS</p>
                             <p class="text-muted">Existing: 3</p>
+                            <button id="myBtn3" class="btn btn-success">SEE RECENT</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /. ROW  -->
+            
+            
+ 
+            
+            
             <hr />
             <div class="row">
                 <div class="col-md-6 col-sm-12 col-xs-12">
@@ -350,6 +349,22 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
         }
     }
 </script>
+<script>
 
+myBtn3.onclick = function() {
+        $.ajax({
+            type: "GET",
+            url: "/getPosts",
+            success: function(result) {
+
+   				window.location ='/getPosts';
+            },
+            error: function(result) {
+                alert('error');
+            }
+        });
+
+    }
+</script>
 </body>
 </html>
