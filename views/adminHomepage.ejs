@@ -210,7 +210,11 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
 
                         </div>
                         <div class="modal-body">
-                           <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div> 
+                           <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                           <div id="container1" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>          
+                           <center><ul class="pagination">
+    						<li><a href="#" id="pie">1</a></li>
+    						<li><a href="#" id="bar">2</a></li></ul></center> 
 
                         </div>
                         <div class="modal-footer">
@@ -343,6 +347,20 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
         modal.style.display = "block";
     }
     
+function myContainer() {
+    var x = document.getElementById('container');
+    var y = document.getElementById('container1');
+    x.style.display = 'block';
+    y.style.display = 'none';    
+ }
+ 
+ function myContainer1() {
+    var a = document.getElementById('container1');
+    var b = document.getElementById('container');
+    a.style.display = 'block';
+    b.style.display = 'none';    
+  	}
+    
     btn1.onclick = function() {
         $.ajax({
             type: "GET",
@@ -373,15 +391,67 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
         });
     });
 
-    btn2.onclick = function() {
-        alert("clicked");
+	$("#bar").click(function() {
+        
         modal2.style.display = "block";
-
+		myContainer1();
         $.ajax({
             type: "GET",
             url: "/getUsers",
             success: function (result) {
-                alert(result);
+                modal2.style.display = "block";
+                
+                Highcharts.chart('container1', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Stacked column chart'
+    },
+    xAxis: {
+        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Total fruit consumption'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'Comments',
+        data: [5, 3, 4, 7, 2]
+    }, {
+        name: 'Post',
+        data: [2, 2, 3, 2, 1]
+    }]
+});
+
+            }
+
+        });
+
+    });
+
+
+
+    btn2.onclick = function() {
+        
+        modal2.style.display = "block";
+		myContainer();
+        $.ajax({
+            type: "GET",
+            url: "/getUsers",
+            success: function (result) {
+                
                 modal2.style.display = "block";
 
                 Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
