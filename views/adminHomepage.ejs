@@ -380,70 +380,76 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
         $.ajax({
             type: "GET",
             url: "/getUsers",
-		success: function(result) {
-         		
-         		list=result;
-         		console.log(list);
-         		
-         		 modal2.style.display = "block";	
-				}
+            success: function (result) {
+                alert(result);
+                modal2.style.display = "block";
+
+                Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+
+                    return {
+                        radialGradient: {
+                            cx: 0.5,
+                            cy: 0.3,
+                            r: 0.7
+                        },
+                        stops: [
+                            [0, color],
+                            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                        ]
+                    };
+                });
+
+// Build the chart
+                Highcharts.chart('container', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Types of users '
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                },
+                                connectorColor: 'silver'
+                            }
+                        }
+                    },
+                    series: [{
+
+                        name: 'Number of users:',
+                        data: [
+                           
+
+                            { name: 'Admin', y: result[0].number},
+                            { name: 'Moderator', y: result[1].number },
+                            { name: 'Client', y: result[2].number }
+                           
+                        ]
+                    }]
+                });
+
+
+
+            }
+
         });
 
     }
-        
-    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
-    return {
-        radialGradient: {
-            cx: 0.5,
-            cy: 0.3,
-            r: 0.7
-        },
-        stops: [
-            [0, color],
-            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-        ]
-    };
-});
 
-// Build the chart
-Highcharts.chart('container', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: 'Types of users '
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                style: {
-                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                },
-                connectorColor: 'silver'
-            }
-        }
-    },
-    series: [{
-
-        name: 'Users',
-        data:[
-        	 { name:'Admin', y:list[0].number},
-             { name: 'Moderator', y: list[1].number },
-             { name: 'Client', y: list[1].number  }
-        ]
-    }]
-});
-    
+       
 	
 
 
