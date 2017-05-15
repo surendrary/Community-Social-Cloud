@@ -341,6 +341,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
     btn.onclick = function() {
         modal.style.display = "block";
     }
+    
     btn1.onclick = function() {
         $.ajax({
             type: "GET",
@@ -359,7 +360,14 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
     }
 
 	btn2.onclick = function() {
+	alert("clicked");
         modal2.style.display = "block";
+        $.ajax({
+            type: "GET",
+            url: "/getUsers",
+            success: function(result) {
+                alert(result);
+        });
         
     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
     return {
@@ -384,7 +392,7 @@ Highcharts.chart('container', {
         type: 'pie'
     },
     title: {
-        text: 'What users search for in our sites'
+        text: 'Types of users '
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
