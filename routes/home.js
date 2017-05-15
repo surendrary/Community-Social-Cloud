@@ -238,6 +238,14 @@ exports.logout = function(req,res)
 };
 
 
+exports.message = function(req,res)
+{
+
+	res.render("message");
+};
+
+
+
 
 exports.getModerators= getModerators;
 exports.afterRegister=afterRegister;

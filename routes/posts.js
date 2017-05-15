@@ -1,5 +1,10 @@
 var ejs = require("ejs");
 var mysql = require('./mysql');
+var sendmail = require('sendmail');
+var smtpTransport = require('nodemailer-smtp-transport');
+var nodemailer = require('nodemailer');
+var xoauth2 = require('xoauth2');
+
 
 function addPost(req, res){
 	if(req.session.username){
@@ -88,6 +93,50 @@ function getPosts(req,res){
 	
 }
 
+function postMessage(req, res){
+	console.log("************REQ:",req.session.username);
+	if(req.session.username){
+		console.log("************BODY:",req.body);
+		var insertPost = "insert into Messages (senderEmail, recieverEmail, msgSubject, msgBody) values ('"+ req.session.username +"', '" + req.body.to +"',  '" + req.body.subject +"', '" + req.body.body + "')";
+		mysql.fetchData(function(err,results){
+			if(err){
+				throw err;
+			}
+			else
+			{
+				//logic to send mail here
+				var mailer = require("nodemailer");
+				console.log("YAYYY");
+// Use Smtp Protocol to send Email
+				var smtpTransport = nodemailer.createTransport({
+					service: "gmail",
+					host: "smtp.gmail.com",
+					auth: {
+						user: "testmyouth@gmail.com",
+						pass: "Testouth1@"
+					}
+				});
+
+
+				var mailOptions={
+					to : req.body.to,
+					subject : req.body.subject,
+					text : req.body.body
+				}
+				console.log(mailOptions);
+				smtpTransport.sendMail(mailOptions, function(error, response){
+					if(error){
+						console.log(error);
+						res.end("error");
+					}else{
+						console.log("Message sent: " + response.message);
+						res.end("sent");
+					}
+				});
+			}
+		},insertPost);
+	}
+}
 
 
 
@@ -97,3 +146,4 @@ function getPosts(req,res){
 exports.addPost = addPost;
 exports.addComment = addComment;
 exports.getPosts = getPosts;
+exports.postMessage = postMessage;
