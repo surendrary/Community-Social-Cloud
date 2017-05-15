@@ -90,10 +90,10 @@
                                         </div>
                                         <div class="pull-left meta">
                                             <div class="title h5">
-                                                <a href="#"><b>Ryan Haywood</b></a>
+                                                <a href="#"><b><%=data[i].moderatorName%></b></a>
                                                 made a post.
                                             </div>
-                                            <h6 class="text-muted time">1 minute ago</h6>
+                                            <h6 class="text-muted time"><%=data[i].postTime%></h6>
                                         </div>
                                     </div>
                                     <div class="post-description">
@@ -117,8 +117,13 @@
                                        
                                      
           								<% if(data[i].comments!= null){ 
-          								 var arr = data[i].comments.split(',');%>
-          								<%for( j in arr)
+          								 var arr = data[i].comments.split(',');
+          								 var arr1 = data[i].commentTime.split(',');
+          								 var arr2 = data[i].commentorName.split(',');
+          								 
+          								 var final = arr,arr1,arr2;%>
+          						
+          								<%for(i = 0; i < final.length; i += 1)
                                         {                     
             								%>
                                     	 
@@ -128,10 +133,10 @@
                                                 </a>
                                                 <div class="comment-body">
                                                     <div class="comment-heading">
-                                                        <h4 class="user">Gavino Free</h4>
-                                                        <h5 class="time">5 minutes ago</h5>
+                                                        <h4 class="user"><%=arr2[i]%></h4>
+                                                        <h5 class="time"><%=arr1[i]%></h5>
                                                 </div>
-                                                    <p><%=arr[j]%></p>
+                                                    <p><%=arr[i]%></p>
                                             </li>
                                           <%
                                           }
