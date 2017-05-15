@@ -2222,7 +2222,8 @@ a.btn:focus{
 
 @media only screen and (min-width:480px) {
     .card {
-        margin-bottom: 16px
+        margin-bottom: 16px;
+        margin-top: 50px;
     }
 }
 
