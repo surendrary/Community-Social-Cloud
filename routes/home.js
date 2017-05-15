@@ -194,7 +194,7 @@ function getModerators(req,res)
 
 function getUsers(req,res)
 {
-	var getUsercount = "select userType,count(*) from users group by userType"
+	var getUsercount = "select userType,count(*) as number from users group by userType"
 	console.log("Query is:"+getUsercount);
 	mysql.fetchData(function(err,results){
 		if(err){
