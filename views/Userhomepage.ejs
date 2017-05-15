@@ -94,6 +94,7 @@
                                                 made a post.
                                             </div>
                                             <h6 class="text-muted time">1 minute ago</h6>
+                                            <h7 class="hidden"><%=data[i].ID%></h7>
                                         </div>
                                     </div>
                                     <div class="post-description">
@@ -109,9 +110,12 @@
                                     </div>
                                     <div class="post-footer">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="Add a comment" type="text">
-                                            <span class="input-group-addon">
-                            				<a href="#"><i class="fa fa-edit"></i></a></span>
+                                            <input class="form-control" placeholder="Add a comment" type="text" id=<%=data[i].ID%> />
+                                            <span class="input-group-addon" onclick="postComment(<%=data[i].ID%>)">
+                            				    <a href="#">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </span>
                                         </div>
                                         <ul class="comments-list">
                                        
@@ -193,7 +197,12 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/nivo-lightbox.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/user.js"></script>
 
 </body>
-
+<style>
+    h7.hidden {
+        visibility: hidden;
+    }
+</style>
 </html>

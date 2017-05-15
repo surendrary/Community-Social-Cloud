@@ -46,6 +46,7 @@ function afterSignIn(req,res)
 				console.log("valid Login");
 				req.session.username = results[0].username;
 				req.session.userId = results[0].userId;
+				req.session.userfullname = results[0].firstname + " " + results[0].lastname;
 					//**********************************************8
 					var getPosts ="SELECT ID, posts.Description, GROUP_CONCAT(Comment) AS comments FROM posts LEFT JOIN comments ON posts.ID = comments.postId GROUP BY ID";
 					console.log("Query is:"+getUser);
@@ -53,7 +54,7 @@ function afterSignIn(req,res)
 						if(err){
 							throw err;
 						}
-						else 
+						else
 						{
 							var rows = results;
 							console.log("rows");
