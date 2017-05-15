@@ -286,7 +286,7 @@ Navigation
 }
 
 .navbar.navbar-custom .navigation {
-	padding-bottom: 15px;
+	padding-bottom: 0px;
 
 }
 
@@ -760,12 +760,12 @@ hr.bold {
 }
 
 .intro-content {
-	background: url(/images/bg1.jpg) no-repeat center center;
+	background: url(/images/homebg.jpg) center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
-	padding:100px 0 20px;
+    background-size: auto;
+	padding:80px 0 20px;
 }
 .intro-content.intro-nobg {
 	background:#fff;
