@@ -49,7 +49,7 @@ function addComment(req, res){
 
 function getPosts(req,res){
 	
-	var getPosts = "SELECT ID, posts.Description, GROUP_CONCAT(Comment) AS comments FROM posts LEFT JOIN comments ON posts.ID = comments.postId GROUP BY ID";
+	var getPosts = "SELECT ID, posts.moderatorName,posts.postTime,posts.Description, GROUP_CONCAT(Comment) AS comments,GROUP_CONCAT(commentTime) as commentTime, GROUP_CONCAT(commentorName) as commentorName FROM posts LEFT JOIN comments ON posts.ID = comments.postId GROUP BY ID";
 	mysql.fetchData(function(err,results){
 		if(err){
 			throw err;

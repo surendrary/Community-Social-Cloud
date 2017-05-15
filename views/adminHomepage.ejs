@@ -174,7 +174,8 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
 
                         </div>
                         <div class="modal-body">
-                            <p id="result"></p>
+                            <div id="result"></div>
+
 
                         </div>
                         <div class="modal-footer">
@@ -336,7 +337,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
     var span1 = document.getElementsByClassName("close")[1];
-
+    var span2 = document.getElementsByClassName("close")[2];
     // When the user clicks the button, open the modal
     btn.onclick = function() {
         modal.style.display = "block";
@@ -347,9 +348,12 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
             type: "GET",
             url: "/getModerator",
             success: function(result) {
-                alert(result);
+         var trHTML = '';
+                for(i in result) {
+                    trHTML +=   '<div class="col-md-4"><div class="panel panel-info"><div class="panel-heading"><h4 class="text-center">Id:'+result[i].empId +'</h4></div><div class="panel-body text-center"><p class="lead"><strong>'+result[i].firstname +'</strong></p></div><ul class="list-group list-group-flush text-center"><li class="list-group-item"><i class="icon-ok text-danger"></i>Dept:'+result[i].dept +'</li></ul> <div class="panel-footer"><a class="btn btn-lg btn-block btn-primary">DELETE</a></div></div></div>';
+                     }
+                $('#result').html(trHTML);
 
-                $("#result").html(result[0].username);
                 modal1.style.display = "block";
             },
             error: function(result) {
@@ -447,6 +451,11 @@ Highcharts.chart('container', {
     span1.onclick = function() {
 
         modal1.style.display = "none";
+    }
+
+    span2.onclick = function() {
+
+        modal2.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
