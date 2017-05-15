@@ -14,6 +14,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+     <script src="https://code.highcharts.com/highcharts.js"></script>
+     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    
 
 </head>
 <body>
@@ -28,7 +32,8 @@
         <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adjust">Logout</a>
+        </div>
     </nav>
     <!-- /. NAV TOP  -->
     <nav class="navbar-default navbar-side" role="navigation">
@@ -60,6 +65,10 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                     <h5>Welcome, Love to see you back. </h5>
                 </div>
             </div>
+            
+            
+      
+            
             <!-- /. ROW  -->
             <hr />
             <div class="row">
@@ -144,12 +153,6 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                     </div>
 
                 </div>
-
-
-
-
-
-
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-green set-icon">
@@ -172,7 +175,8 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
 
                         </div>
                         <div class="modal-body">
-                            <p id="result"></p>
+                            <div id="result"></div>
+
 
                         </div>
                         <div class="modal-footer">
@@ -184,13 +188,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                 </div>
 
 
-
-
-
-
-
-
-                <div class="col-md-3 col-sm-6 col-xs-6">
+           <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-blue set-icon">
                     <i class="fa fa-bar-chart-o"></i>
@@ -198,22 +196,50 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                         <div class="text-box" >
                             <p class="main-text">SEE ANALYTICS</p>
                             <p class="text-muted">Existing: 3</p>
+                            <button id="myBtn2"  class="btn btn-success">SEE</button>
                         </div>
                     </div>
                 </div>
+           <div id="myModal2" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <span class="close">&times;</span>
+                            <h2>Graphs</h2>
+
+                        </div>
+                        <div class="modal-body">
+                           <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div> 
+
+                        </div>
+                        <div class="modal-footer">
+                            <h3></h3>
+                        </div>
+
+                    </div>
+
+                </div>
+           
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="panel panel-back noti-box">
                 <span class="icon-box bg-color-brown set-icon">
                     <i class="fa fa-envelope-o"></i>
                 </span>
-                        <div class="text-box" >
+                        <div class="text-box">
                             <p class="main-text">RECENT POSTS</p>
                             <p class="text-muted">Existing: 3</p>
+                            <button id="myBtn3" class="btn btn-success">SEE RECENT</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /. ROW  -->
+            
+            
+ 
+            
+            
             <hr />
             <div class="row">
                 <div class="col-md-6 col-sm-12 col-xs-12">
@@ -302,27 +328,33 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
 
     var modal = document.getElementById('myModal');
     var modal1=document.getElementById('myModal1');
-
+    var modal2=document.getElementById('myModal2');
+   
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn");
     var btn1 = document.getElementById("myBtn1");
+    var btn2 = document.getElementById("myBtn2");
 
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
     var span1 = document.getElementsByClassName("close")[1];
-
+    var span2 = document.getElementsByClassName("close")[2];
     // When the user clicks the button, open the modal
     btn.onclick = function() {
         modal.style.display = "block";
     }
+    
     btn1.onclick = function() {
         $.ajax({
             type: "GET",
             url: "/getModerator",
             success: function(result) {
-                alert(result);
+         var trHTML = '';
+                for(i in result) {
+                    trHTML +=   '<div class="col-md-4"><div class="panel panel-info"><div class="panel-heading"><h4 class="text-center">Id:'+result[i].empId +'</h4></div><div class="panel-body text-center"><p class="lead"><strong>'+result[i].firstname +'</strong></p></div><ul class="list-group list-group-flush text-center"><li class="list-group-item"><i class="icon-ok text-danger"></i>Dept:'+result[i].dept +'</li></ul> <div class="panel-footer"><a class="btn btn-lg btn-block btn-primary">DELETE</a></div></div></div>';
+                     }
+                $('#result').html(trHTML);
 
-                $("#result").html(result[0].username);
                 modal1.style.display = "block";
             },
             error: function(result) {
@@ -331,6 +363,101 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
         });
 
     }
+
+    $("#logout").click(function() {
+        $.ajax({
+            type: "GET",
+            url: "/logout",
+            success: function(result) {
+                window.location='/';
+            }
+        });
+    });
+
+    btn2.onclick = function() {
+        alert("clicked");
+        modal2.style.display = "block";
+
+        $.ajax({
+            type: "GET",
+            url: "/getUsers",
+            success: function (result) {
+                alert(result);
+                modal2.style.display = "block";
+            }
+        });
+
+    }
+        
+    Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+    return {
+        radialGradient: {
+            cx: 0.5,
+            cy: 0.3,
+            r: 0.7
+        },
+        stops: [
+            [0, color],
+            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+        ]
+    };
+});
+
+// Build the chart
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Types of users '
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                },
+                connectorColor: 'silver'
+            }
+        }
+    },
+    series: [{
+
+        name: 'Searches',
+        data: [
+                // {name:mySeries, 
+                // }
+                
+
+           { name: 'Facebook', y: 3 },
+            {
+                name: 'Watson',
+                y: 5,
+                
+            },
+            { name: 'Machine Learning', y: 2 },
+            { name: 'Artificial Intelligence', y: 2 }, 
+            { name: 'Modi', y: 1 },
+            { name: 'Obama', y: 1 }
+        ]
+    }]
+});
+    }
+	
+
+
+
+
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
@@ -342,6 +469,11 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
         modal1.style.display = "none";
     }
 
+    span2.onclick = function() {
+
+        modal2.style.display = "none";
+    }
+
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
@@ -350,6 +482,24 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
         }
     }
 </script>
+<script>
 
+myBtn3.onclick = function() {
+        $.ajax({
+            type: "GET",
+            url: "/getPosts",
+            success: function(result) {
+
+   				window.location ='/getPosts';
+            },
+            error: function(result) {
+                alert('error');
+            }
+        });
+
+    }
+
+
+</script>
 </body>
 </html>

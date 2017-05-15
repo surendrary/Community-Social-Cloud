@@ -432,3 +432,15 @@ line-height: 1.428571429;
     background-color: #5cb85c;
     color: white;
 }
+
+.lead { font-size: 33px;margin-bottom:0px; }
+
+.panel-body {
+    padding: 0px !important;
+}
+
+.panel-info > .panel-heading {
+    color: #ffffff !important;
+    background-color: #00CE6F !important;
+    border-color: #00CE6F !important;
+}

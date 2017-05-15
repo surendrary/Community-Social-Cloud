@@ -22,7 +22,7 @@
     <link id="bodybg" href="bodybg/bg1.css" rel="stylesheet" type="text/css" />
     <!-- template skin -->
     <link id="t-colors" href="color/default.css" rel="stylesheet">
-
+    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -49,14 +49,14 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#intro">Home</a></li>
                     <li><a href="#service">Messages</a></li>
-                    <li><a href="#doctor">Doctors</a></li>
-                    <li><a href="#facilities">About Community</a></li>
-                    <li><a href="#pricing">Members</a></li>
-
-                </ul>
+                    </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
+        <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;">  <a href="#" id="logout" class="btn btn-danger square-btn-adjust">Logout</a> </div>
         <!-- /.container -->
     </nav>
 
@@ -191,6 +191,19 @@
             <h5 style="text-align:center; font-size: small; color:#456297">Live Chat</h5>
         </div>
     </div>
+
+    <script>
+        $("#logout").click(function() {
+            $.ajax({
+                type: "GET",
+                url: "/logout",
+                success: function(result) {
+                    window.location='/';
+                }
+            });
+        });
+
+    </script>
 
     <!-- /Section: intro -->
 

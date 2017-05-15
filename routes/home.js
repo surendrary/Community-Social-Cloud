@@ -48,7 +48,7 @@ function afterSignIn(req,res)
 				req.session.userId = results[0].userId;
 				req.session.userfullname = results[0].firstname + " " + results[0].lastname;
 					//**********************************************8
-					var getPosts ="SELECT ID, posts.Description, GROUP_CONCAT(Comment) AS comments FROM posts LEFT JOIN comments ON posts.ID = comments.postId GROUP BY ID";
+					var getPosts ="SELECT ID, posts.moderatorName,posts.postTime,posts.Description, GROUP_CONCAT(Comment) AS comments,GROUP_CONCAT(commentTime) as commentTime, GROUP_CONCAT(commentorName) as commentorName FROM posts LEFT JOIN comments ON posts.ID = comments.postId GROUP BY ID";
 					console.log("Query is:"+getUser);
 					mysql.fetchData(function(err,results){
 						if(err){
@@ -132,7 +132,7 @@ function afterRegister(req,res)
 	var registerUser;
 	if(req.param("empId") !=null)
 	{
-		registerUser="insert into users(username,password,firstname,lastname,usertype,empId) values('"+req.param("username")+"','"+req.param("password")+"','"+req.param("firstname")+"','"+req.param("lastname")+"',1,'"+req.param("empId")+"')";
+		registerUser="insert into users(username,password,firstname,lastname,usertype,empId,dept) values('"+req.param("username")+"','"+req.param("password")+"','"+req.param("firstname")+"','"+req.param("lastname")+"',1,'"+req.param("empId")+"','"+req.param("dept")+"')";
 
 	}
 	else {
@@ -184,6 +184,32 @@ function getModerators(req,res)
 				var jsonParse = JSON.parse(jsonString);
 				console.log(jsonParse);
 				res.send(jsonParse);
+
+
+			}
+		}
+
+	},getModerator);
+}
+
+function getUsers(req,res)
+{
+	var getUsercount = "select userType,count(*) from users group by userType"
+	console.log("Query is:"+getUsercount);
+	mysql.fetchData(function(err,results){
+		if(err){
+			throw err;
+		}
+		else
+		{
+			if(results.length > 0)
+			{
+				var rows = results;
+				console.log("rows");
+				var jsonString = JSON.stringify(results);
+				var jsonParse = JSON.parse(jsonString);
+				console.log(jsonParse);
+				res.send(jsonParse);
 				/*ejs.renderFile('./views/adminHomepage.ejs',{data:jsonParse},function(err, result) {
 					// render on success
 					if (!err) {
@@ -199,17 +225,22 @@ function getModerators(req,res)
 			}
 		}
 
-	},getModerator);
+	},getUsercount);
 }
 
 
 
 
-
+exports.logout = function(req,res)
+{
+	req.session.destroy();
+	res.redirect('/');
+};
 
 
 
 exports.getModerators= getModerators;
 exports.afterRegister=afterRegister;
+exports.getUsers = getUsers;
 exports.signin=signin;
 exports.afterSignIn=afterSignIn;
