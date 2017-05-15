@@ -328,12 +328,12 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
     var modal = document.getElementById('myModal');
     var modal1=document.getElementById('myModal1');
     var modal2=document.getElementById('myModal2');
-   
+    var dataList=[];
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn");
     var btn1 = document.getElementById("myBtn1");
     var btn2 = document.getElementById("myBtn2");
-
+    var list=[];
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
     var span1 = document.getElementsByClassName("close")[1];
@@ -368,7 +368,10 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
             type: "GET",
             url: "/getUsers",
             success: function(result) {
-         		alert(result);
+         		
+         		list=result;
+         		console.log(list[0]);
+         		
          		 modal2.style.display = "block";
             }
         });
@@ -419,30 +422,17 @@ Highcharts.chart('container', {
     },
     series: [{
 
-        name: 'Searches',
-        data: [
-                // {name:mySeries, 
-                // }
-                
+        name: 'Users',
+        data: datalist [
 
-           { name: 'Facebook', y: 3 },
-            {
-                name: 'Watson',
-                y: 5,
-                
-            },
-            { name: 'Machine Learning', y: 2 },
-            { name: 'Artificial Intelligence', y: 2 }, 
-            { name: 'Modi', y: 1 },
-            { name: 'Obama', y: 1 }
+            { name:'Admin', y:list[0].number},
+            { name: 'Moderator', y: list[1].number },
+            { name: 'Client', y: list[1].number  }
         ]
     }]
 });
-    }
+    
 	
-
-
-
 
 
     // When the user clicks on <span> (x), close the modal
