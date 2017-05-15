@@ -32,7 +32,8 @@
         <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adjust">Logout</a>
+        </div>
     </nav>
     <!-- /. NAV TOP  -->
     <nav class="navbar-default navbar-side" role="navigation">
@@ -363,6 +364,16 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
 
     }
 
+    $("#logout").click(function() {
+        $.ajax({
+            type: "GET",
+            url: "/logout",
+            success: function(result) {
+                window.location='/';
+            }
+        });
+    });
+
 	btn2.onclick = function() {
 	alert("clicked");
         modal2.style.display = "block";
@@ -371,6 +382,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
             url: "/getUsers",
             success: function(result) {
                 alert(result);
+            }
         });
         
     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
@@ -482,6 +494,8 @@ myBtn3.onclick = function() {
         });
 
     }
+
+
 </script>
 </body>
 </html>
