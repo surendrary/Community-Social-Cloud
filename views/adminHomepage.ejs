@@ -328,7 +328,7 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
     var modal = document.getElementById('myModal');
     var modal1=document.getElementById('myModal1');
     var modal2=document.getElementById('myModal2');
-    var dataList=[];
+    
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn");
     var btn1 = document.getElementById("myBtn1");
@@ -380,18 +380,13 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
         $.ajax({
             type: "GET",
             url: "/getUsers",
-
-            success: function(result) {
+		success: function(result) {
          		
          		list=result;
-         		console.log(list[0]);
+         		console.log(list);
          		
-         		 modal2.style.display = "block";
-
-            success: function (result) {
-                alert(result);
-                modal2.style.display = "block";
-           }
+         		 modal2.style.display = "block";	
+				}
         });
 
     }
@@ -441,11 +436,10 @@ Highcharts.chart('container', {
     series: [{
 
         name: 'Users',
-        data: datalist [
-
-            { name:'Admin', y:list[0].number},
-            { name: 'Moderator', y: list[1].number },
-            { name: 'Client', y: list[1].number  }
+        data:[
+        	 { name:'Admin', y:list[0].number},
+             { name: 'Moderator', y: list[1].number },
+             { name: 'Client', y: list[1].number  }
         ]
     }]
 });
