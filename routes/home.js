@@ -191,6 +191,42 @@ function getModerators(req,res)
 	},getModerator);
 }
 
+function getUsers(req,res)
+{
+	var getUsercount = "select userType,count(*) from users group by userType"
+	console.log("Query is:"+getUsercount);
+	mysql.fetchData(function(err,results){
+		if(err){
+			throw err;
+		}
+		else
+		{
+			if(results.length > 0)
+			{
+				var rows = results;
+				console.log("rows");
+				var jsonString = JSON.stringify(results);
+				var jsonParse = JSON.parse(jsonString);
+				console.log(jsonParse);
+				res.send(jsonParse);
+				/*ejs.renderFile('./views/adminHomepage.ejs',{data:jsonParse},function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});*/
+
+			}
+		}
+
+	},getUsercount);
+}
+
 
 
 
@@ -200,5 +236,6 @@ function getModerators(req,res)
 
 exports.getModerators= getModerators;
 exports.afterRegister=afterRegister;
+exports.getUsers = getUsers;
 exports.signin=signin;
 exports.afterSignIn=afterSignIn;
