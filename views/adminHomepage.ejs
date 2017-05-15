@@ -349,7 +349,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
             success: function(result) {
          var trHTML = '';
                 for(i in result) {
-                    trHTML +=   '<div class="col-md-3"><div class="panel panel-info"><div class="panel-heading"><h4 class="text-center">Id:'+result[i].empId +'</h4></div><div class="panel-body text-center"><p class="lead"><strong>'+result[i].firstname +'</strong></p></div><ul class="list-group list-group-flush text-center"><li class="list-group-item"><i class="icon-ok text-danger"></i>Dept:'+result[i].dept +'</li></ul> <div class="panel-footer"><a class="btn btn-lg btn-block btn-primary">DELETE</a></div></div></div>';
+                    trHTML +=   '<div class="col-md-4"><div class="panel panel-info"><div class="panel-heading"><h4 class="text-center">Id:'+result[i].empId +'</h4></div><div class="panel-body text-center"><p class="lead"><strong>'+result[i].firstname +'</strong></p></div><ul class="list-group list-group-flush text-center"><li class="list-group-item"><i class="icon-ok text-danger"></i>Dept:'+result[i].dept +'</li></ul> <div class="panel-footer"><a class="btn btn-lg btn-block btn-primary">DELETE</a></div></div></div>';
                      }
                 $('#result').html(trHTML);
 
