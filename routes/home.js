@@ -131,7 +131,7 @@ function afterRegister(req,res)
 	var registerUser;
 	if(req.param("empId") !=null)
 	{
-		registerUser="insert into users(username,password,firstname,lastname,usertype,empId) values('"+req.param("username")+"','"+req.param("password")+"','"+req.param("firstname")+"','"+req.param("lastname")+"',1,'"+req.param("empId")+"')";
+		registerUser="insert into users(username,password,firstname,lastname,usertype,empId,dept) values('"+req.param("username")+"','"+req.param("password")+"','"+req.param("firstname")+"','"+req.param("lastname")+"',1,'"+req.param("empId")+"','"+req.param("dept")+"')";
 
 	}
 	else {
@@ -183,17 +183,7 @@ function getModerators(req,res)
 				var jsonParse = JSON.parse(jsonString);
 				console.log(jsonParse);
 				res.send(jsonParse);
-				/*ejs.renderFile('./views/adminHomepage.ejs',{data:jsonParse},function(err, result) {
-					// render on success
-					if (!err) {
-						res.end(result);
-					}
-					// render or error
-					else {
-						res.end('An error occurred');
-						console.log(err);
-					}
-				});*/
+
 
 			}
 		}
