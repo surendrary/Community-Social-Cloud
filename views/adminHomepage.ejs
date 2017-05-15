@@ -374,16 +374,20 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
         });
     });
 
-	btn2.onclick = function() {
-	alert("clicked");
+    btn2.onclick = function() {
+        alert("clicked");
         modal2.style.display = "block";
+
         $.ajax({
             type: "GET",
             url: "/getUsers",
-            success: function(result) {
+            success: function (result) {
                 alert(result);
+                modal2.style.display = "block";
             }
         });
+
+    }
         
     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
     return {
