@@ -70,7 +70,7 @@ function getPosts(req,res){
 				console.log("valid Login");
 				//res.render("Userhomepage");
 				console.log(jsonParse);
-				ejs.renderFile('./views/Userhomepage.ejs',{data:jsonParse},function(err, result) {
+				/*ejs.renderFile('./views/Userhomepage.ejs',{data:jsonParse},function(err, result) {
 			        // render on success
 			        if (!err) {
 			            res.end(result);
@@ -80,7 +80,8 @@ function getPosts(req,res){
 			            res.end('An error occurred');
 			            console.log(err);
 			        }
-				});
+				});*/
+				res.render("Userhomepage",{data:jsonParse});
 			   
 			}
 			else{

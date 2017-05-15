@@ -48,7 +48,7 @@
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#intro">Home</a></li>
-                    <li><a href="#service">Messages</a></li>
+                    <li><a href="#" id="msg">Messages</a></li>
                     </ul>
                 <div style="color: white;float: right;font-size: 16px; padding-left: 20px; padding-top: 25px">  <a id="logout" href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
 
@@ -190,6 +190,15 @@
                 url: "/logout",
                 success: function(result) {
                     window.location='/';
+                }
+            });
+        });
+        $("#msg").click(function() {
+            $.ajax({
+                type: "GET",
+                url: "/message",
+                success: function(result) {
+                    window.location.assign("/message");
                 }
             });
         });
