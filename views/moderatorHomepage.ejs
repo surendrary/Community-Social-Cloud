@@ -22,7 +22,7 @@
     <link id="bodybg" href="bodybg/bg1.css" rel="stylesheet" type="text/css" />
     <!-- template skin -->
     <link id="t-colors" href="color/default.css" rel="stylesheet">
-
+    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -39,7 +39,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                    <img src="images/logo.png" alt="" width="150" height="60" />
+                    <img src="images/logo.png" alt="WeMedUp" />
                 </a>
             </div>
 
@@ -50,14 +50,12 @@
                     <li class="active"><a href="#intro">Home</a></li>
                     <li><a href="#service">Messages</a></li>
                     </ul>
+                <div style="color: white;float: right;font-size: 16px; padding-left: 20px; padding-top: 25px">  <a id="logout" href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+
             </div>
             <!-- /.navbar-collapse -->
         </div>
-        <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
-        <!-- /.container -->
+              <!-- /.container -->
     </nav>
 
     <!-- Section: intro -->
@@ -115,14 +113,7 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                                     </div>
                                     <div class="post-description">
                                         <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
-                                        <div class="stats">
-                                            <a href="#" class="btn btn-default stat-item">
-                                                <i class="fa fa-thumbs-up icon"></i>2
-                                            </a>
-                                            <a href="#" class="btn btn-default stat-item">
-                                                <i class="fa fa-share icon"></i>12
-                                            </a>
-                                        </div>
+
                                     </div>
                                     <div class="post-footer">
                                         <div class="input-group">
@@ -191,6 +182,19 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
             <h5 style="text-align:center; font-size: small; color:#456297">Live Chat</h5>
         </div>
     </div>
+
+    <script>
+        $("#logout").click(function() {
+            $.ajax({
+                type: "GET",
+                url: "/logout",
+                success: function(result) {
+                    window.location='/';
+                }
+            });
+        });
+
+    </script>
 
     <!-- /Section: intro -->
 

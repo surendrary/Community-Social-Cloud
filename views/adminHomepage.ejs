@@ -26,13 +26,14 @@
         <div class="navbar-header">
 
             <a class="navbar-brand" href="index.html">
-                <img src="images/logo.png" alt="" width="150" height="60" />
+                <img src="images/logo.png" alt="WeMedUp" style="padding-top: 10px;" />
             </a>
         </div>
         <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adjust">Logout</a>
+        </div>
     </nav>
     <!-- /. NAV TOP  -->
     <nav class="navbar-default navbar-side" role="navigation">
@@ -46,9 +47,9 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                 <li>
                     <a class="active-menu"  href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
                 </li>
-                <li>
+               <!-- <li>
                     <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> UI Elements</a>
-                </li>
+                </li>-->
 
             </ul>
 
@@ -257,13 +258,12 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
                 </div>
 
 
-                <div class="col-md-3 col-sm-12 col-xs-12">
+                <!--<div class="col-md-3 col-sm-12 col-xs-12">
                     <div class="panel back-dash">
                         <i class="fa fa-dashboard fa-3x"></i><strong> &nbsp; SPEED</strong>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing sit ametsit amet elit ftr. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                     </div>
-
-                </div>
+                </div>-->
                 <div class="col-md-3 col-sm-12 col-xs-12 ">
                     <div class="panel ">
                         <div class="main-temp-back">
@@ -363,20 +363,38 @@ font-size: 16px;">  <a href="#" class="btn btn-danger square-btn-adjust">Logout<
 
     }
 
+    $("#logout").click(function() {
+        $.ajax({
+            type: "GET",
+            url: "/logout",
+            success: function(result) {
+                window.location='/';
+            }
+        });
+    });
+
     btn2.onclick = function() {
+        alert("clicked");
+        modal2.style.display = "block";
+
         $.ajax({
             type: "GET",
             url: "/getUsers",
+
             success: function(result) {
          		
          		list=result;
          		console.log(list[0]);
          		
          		 modal2.style.display = "block";
-            }
+
+            success: function (result) {
+                alert(result);
+                modal2.style.display = "block";
+           }
         });
 
-    
+    }
         
     Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
     return {
@@ -474,6 +492,8 @@ myBtn3.onclick = function() {
         });
 
     }
+
+
 </script>
 </body>
 </html>

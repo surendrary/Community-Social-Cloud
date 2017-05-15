@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Medicio landing page template for Health niche</title>
+    <title>WeMedUp</title>
 
     <!-- css -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -24,7 +24,7 @@
     <link id="bodybg" href="bodybg/bg1.css" rel="stylesheet" type="text/css" />
     <!-- template skin -->
     <link id="t-colors" href="color/default.css" rel="stylesheet">
-
+    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -41,7 +41,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                    <img src="images/logo.png" alt="" width="150" height="60" />
+                    <img src="images/logo.png" alt="WeMedUp" style="padding-left: 10px"/>
                 </a>
             </div>
 
@@ -52,7 +52,7 @@
                     <li><a href="#intro">Home</a></li>
                     <li><a href="#service">Messages</a></li>
                 </ul>
-                <div style="color: white;float: right;font-size: 16px; padding-left: 20px">  <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+                <div style="color: white;float: right;font-size: 16px; padding-left: 20px; padding-top: 25px">  <a id="logout" href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
 
             </div>
             <!-- /.navbar-collapse -->
@@ -93,24 +93,21 @@
                                                 made a post.
                                             </div>
                                             <h6 class="text-muted time"><%=data[i].postTime%></h6>
+                                            <h7 class="hidden"><%=data[i].ID%></h7>
                                         </div>
                                     </div>
                                     <div class="post-description">
                                         <p><%= data[i].Description %></p>
-                                        <div class="stats">
-                                            <a href="#" class="btn btn-default stat-item">
-                                                <i class="fa fa-thumbs-up icon"></i>2
-                                            </a>
-                                            <a href="#" class="btn btn-default stat-item">
-                                                <i class="fa fa-share icon"></i>12
-                                            </a>
-                                        </div>
+
                                     </div>
                                     <div class="post-footer">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="Add a comment" type="text">
-                                            <span class="input-group-addon">
-                            				<a href="#"><i class="fa fa-edit"></i></a></span>
+                                            <input class="form-control" placeholder="Add a comment" type="text" id=<%=data[i].ID%> />
+                                            <span class="input-group-addon" onclick="postComment(<%=data[i].ID%>)">
+                            				    <a href="#">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </span>
                                         </div>
                                         <ul class="comments-list">
                                        
@@ -185,6 +182,20 @@
 </div>
 <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
 
+<script>
+    $("#logout").click(function() {
+        $.ajax({
+            type: "GET",
+            url: "/logout",
+            success: function(result) {
+                window.location='/';
+            }
+        });
+    });
+
+</script>
+
+
 <!-- Core JavaScript Files -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -197,7 +208,12 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/nivo-lightbox.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/user.js"></script>
 
 </body>
-
+<style>
+    h7.hidden {
+        visibility: hidden;
+    }
+</style>
 </html>

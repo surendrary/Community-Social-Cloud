@@ -286,8 +286,7 @@ Navigation
 }
 
 .navbar.navbar-custom .navigation {
-	padding-bottom: 0px;
-
+	padding-bottom: 10px;
 }
 
 
@@ -775,7 +774,7 @@ hr.bold {
 }
 .container {
 
-    margin-left: 2px !important;
+    margin-left: 85px !important;
     padding-left: 0px !important;
     margin-right: 0px !important;
     padding-right: 0px !important;
@@ -2222,7 +2221,8 @@ a.btn:focus{
 
 @media only screen and (min-width:480px) {
     .card {
-        margin-bottom: 16px
+        margin-bottom: 16px;
+        margin-top: 50px;
     }
 }
 

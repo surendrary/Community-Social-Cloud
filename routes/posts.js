@@ -3,7 +3,7 @@ var mysql = require('./mysql');
 
 function addPost(req, res){
 	if(req.session.username){
-		var insertPost = "insert into posts (description, moderator, postTime) values ('"+ req.param('post') +"', " + req.session.userId +", now())";
+		var insertPost = "insert into posts (description, moderator, postTime, moderatorName) values ('"+ req.param('post') +"', " + req.session.userId +", CURRENT_TIMESTAMP(), '" + req.session.userfullname + "')";
 		mysql.fetchData(function(err,results){
 			if(err){
 				throw err;
@@ -21,7 +21,7 @@ function addPost(req, res){
 
 function addComment(req, res){
 	if(req.session.username){
-		var insertComment = "insert into comments (postId, comment) values (" + req.param("postId") + ",'" + req.param("comment") + "')";
+		var insertComment = "insert into comments (postId, comment, commentor, commentTime, commentorName) values (" + req.param("postId") + ",'" + req.param("comment") + "', " + req.session.userId + ", CURRENT_TIMESTAMP() ,'" + req.session.userfullname + "')";
 		mysql.fetchData(function(err,results){
 			if(err){
 				throw err;
