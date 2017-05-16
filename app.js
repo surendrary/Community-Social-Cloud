@@ -46,8 +46,8 @@ app.get('/getPosts',posts.getPosts);
 app.get('/getModerator',home.getModerators);
 app.get('/getUsers', home.getUsers);
 app.get('/logout',home.logout);
-app.get('/message',home.message);
-app.post('/sendMessage',posts.postMessage);
+//app.get('/message',home.message);
+//app.post('/sendMessage',posts.postMessage);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

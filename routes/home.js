@@ -47,6 +47,7 @@ function afterSignIn(req,res)
 				req.session.username = results[0].username;
 				req.session.userId = results[0].userId;
 				req.session.userfullname = results[0].firstname + " " + results[0].lastname;
+				req.session.loginType = req.param("inputLoginAs");
 					//**********************************************8
 					var getPosts ="SELECT ID, posts.moderatorName,posts.postTime,posts.Description, GROUP_CONCAT(Comment) AS comments,GROUP_CONCAT(commentTime) as commentTime, GROUP_CONCAT(commentorName) as commentorName FROM posts LEFT JOIN comments ON posts.ID = comments.postId GROUP BY ID";
 					console.log("Query is:"+getUser);

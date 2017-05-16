@@ -98,6 +98,10 @@
 
                         <div class="bootstrap snippet" style="width: 1150px">
                             <div class="col-sm-8">
+                                <% for(var i in data) 
+	            					{                     
+            						%>
+                                
                                 <div class="panel panel-white post panel-shadow">
                                     <div class="post-heading">
                                         <div class="pull-left image">
@@ -105,14 +109,14 @@
                                         </div>
                                         <div class="pull-left meta">
                                             <div class="title h5">
-                                                <a href="#"><b>Ryan Haywood</b></a>
+                                                <a href="#"><b><%=data[i].moderatorName%></b></a>
                                                 made a post.
                                             </div>
-                                            <h6 class="text-muted time">1 minute ago</h6>
+                                            <h6 class="text-muted time"><%=data[i].postTime%></h6>
                                         </div>
                                     </div>
                                     <div class="post-description">
-                                        <p>Bootdey is a gallery of free snippets resources templates and utilities for bootstrap css hmtl js framework. Codes for developers and web designers</p>
+                                        <p><%= data[i].Description %></p>
 
                                     </div>
                                     <div class="post-footer">
@@ -122,53 +126,61 @@
                                                 <a href="#"><i class="fa fa-edit"></i></a>
                                             </span>
                                         </div>
-                                        <ul class="comments-list">
-                                            <li class="comment">
+                                        
+                                        
+                                         <ul class="comments-list">
+                                       
+                                     
+          								<% if(data[i].comments!= null){ 
+          								 var arr = data[i].comments.split(',');
+          								 var arr1 = data[i].commentTime.split(',');
+          								 var arr2 = data[i].commentorName.split(',');
+          								 
+          								 var final = arr,arr1,arr2;%>
+          						
+          								<%for(i = 0; i < final.length; i += 1)
+                                        {                     
+            								%>
+                                    	 
+                                         	<li class="comment">
                                                 <a class="pull-left" href="#">
                                                     <img class="avatar" src="http://bootdey.com/img/Content/user_1.jpg" alt="avatar">
                                                 </a>
                                                 <div class="comment-body">
                                                     <div class="comment-heading">
-                                                        <h4 class="user">Gavino Free</h4>
-                                                        <h5 class="time">5 minutes ago</h5>
-                                                    </div>
-                                                    <p>Sure, oooooooooooooooohhhhhhhhhhhhhhhh</p>
+                                                        <h4 class="user"><%=arr2[i]%></h4>
+                                                        <h5 class="time"><%=arr1[i]%></h5>
                                                 </div>
-                                                <ul class="comments-list">
-                                                    <li class="comment">
-                                                        <a class="pull-left" href="#">
-                                                            <img class="avatar" src="http://bootdey.com/img/Content/user_3.jpg" alt="avatar">
-                                                        </a>
-                                                        <div class="comment-body">
-                                                            <div class="comment-heading">
-                                                                <h4 class="user">Ryan Haywood</h4>
-                                                                <h5 class="time">3 minutes ago</h5>
-                                                            </div>
-                                                            <p>Relax my friend</p>
-                                                        </div>
-                                                    </li>
-                                                    <li class="comment">
-                                                        <a class="pull-left" href="#">
-                                                            <img class="avatar" src="http://bootdey.com/img/Content/user_2.jpg" alt="avatar">
-                                                        </a>
-                                                        <div class="comment-body">
-                                                            <div class="comment-heading">
-                                                                <h4 class="user">Gavino Free</h4>
-                                                                <h5 class="time">3 minutes ago</h5>
-                                                            </div>
-                                                            <p>Ok, cool.</p>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                                    <p><%=arr[i]%></p>
                                             </li>
-                                        </ul>
-                                    </div>
+                                          <%
+                                          }
+                                        %> 
+          								
+          								<% } %>
+          										
+                                       
+                                         
+                      
+                                        
+                                                    
+                                    </ul>
+                                     </div>
+                                   
+                                    </div>   
+                                    <br>       
+           							<% 
+	            					}  
+	       						%>
+         
+                                                              
+        <!-- This code makes a paragraph -->
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                </div>
+               </div>
 
 
 
@@ -176,6 +188,7 @@
 
         </div>
     </section>
+    
     <div>
         <div class="wow fadeInRightBig" style="position: fixed ; height: 200px;width:150px;  bottom:0;right:0;" data-wow-duration="2s" data-wow-delay="0.2s">
             <img src="images/img-1.png" class="img-responsive" />
