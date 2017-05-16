@@ -397,3 +397,8 @@ body{margin-top:20px;}
 .message-list-wrapper{
     background-color:  rgba(94, 96, 98, 0.3);
 }
+
+h5{
+    font-size: 18px; line-height:139%; letter-spacing: .7px;
+    color: rgba(255, 83, 13, 0.68);
+}
