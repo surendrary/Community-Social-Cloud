@@ -298,19 +298,19 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
         modal.style.display = "block";
     }
     
-/*function myContainer() {
+function myContainer() {
     var x = document.getElementById('container');
     var y = document.getElementById('container1');
     x.style.display = 'block';
     y.style.display = 'none';    
- } */
+ } 
  
- /*function myContainer1() {
+  function myContainer1() {
     var a = document.getElementById('container1');
     var b = document.getElementById('container');
     a.style.display = 'block';
     b.style.display = 'none';    
-  	}*/
+  	}
     
     btn1.onclick = function() {
         $.ajax({
@@ -347,7 +347,7 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
     btn2.onclick = function() {
         
         modal2.style.display = "block";
-		//myContainer();
+		myContainer();
         $.ajax({
             type: "GET",
             url: "/getUsers",
@@ -424,7 +424,7 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
 $("#bar").click(function() {
         
         modal2.style.display = "block";
-		//myContainer1();
+		myContainer1();
         $.ajax({
             type: "GET",
             url: "/getPostcomments",
