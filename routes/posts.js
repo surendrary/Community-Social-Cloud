@@ -78,7 +78,7 @@ function getPosts(req,res){
 				//#######################################
 				if(req.session.loginType == 2 || req.session.loginType == 0) {
 					console.log(req.param("inputLoginAs"));
-					ejs.renderFile('./views/Userhomepage.ejs',{data:jsonParse,username:req.session.userfullname},function(err, result) {
+					ejs.renderFile('./CommunitySocialCloud/views/Userhomepage.ejs',{data:jsonParse,username:req.session.userfullname},function(err, result) {
 				        // render on success
 				        if (!err) {
 				            res.end(result);
@@ -92,7 +92,7 @@ function getPosts(req,res){
 				}
 				else if(req.session.loginType == 1)
 				{
-					ejs.renderFile('./views/moderatorHomepage.ejs',{data:jsonParse,username:req.session.userfullname},function(err, result) {
+					ejs.renderFile('./CommunitySocialCloud/views/moderatorHomepage.ejs',{data:jsonParse,username:req.session.userfullname},function(err, result) {
 				        // render on success
 				        if (!err) {
 				            res.end(result);
