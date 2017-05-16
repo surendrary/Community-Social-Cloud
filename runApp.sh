@@ -1,1 +1,1 @@
-node CommunitySocialCloud/app.js
+node app.js
