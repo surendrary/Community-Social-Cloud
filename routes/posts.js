@@ -4,6 +4,10 @@ var sendmail = require('sendmail');
 var smtpTransport = require('nodemailer-smtp-transport');
 var nodemailer = require('nodemailer');
 var xoauth2 = require('xoauth2');
+var mongo = require("./mongoConnection");
+var mongoURL = "mongodb://Shruti:Nyati123!@cluster0-shard-00-00-m8imh.mongodb.net:27017,cluster0-shard-00-01-m8imh.mongodb.net:27017,cluster0-shard-00-02-m8imh.mongodb.net:27017/CMPE281?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin"
+
+
 
 
 function addPost(req, res){
@@ -114,21 +118,18 @@ function getPosts(req,res){
 }
 
 
-function postMessage(req, res){
-	console.log("************REQ:",req.session.username);
-	if(req.session.username){
-		console.log("************BODY:",req.body);
-		var insertPost = "insert into Messages (senderEmail, recieverEmail, msgSubject, msgBody) values ('"+ req.session.username +"', '" + req.body.to +"',  '" + req.body.subject +"', '" + req.body.body + "')";
-		mysql.fetchData(function(err,results){
-			if(err){
-				throw err;
-			}
-			else
-			{
-				//logic to send mail here
+
+
+
+function postMessage(req, res)
+{
+
+	mongo.connect(mongoURL, function(err, db){
+		var coll = mongo.collection('Messages');
+		coll.insert({"senderEmail" : req.session.username, "recieverEmail":req.body.to, "msgSubject" : req.body.subject, "msgBody" : req.body.body}, function(err, user){
+			if (user) {
 				var mailer = require("nodemailer");
 				console.log("YAYYY");
-// Use Smtp Protocol to send Email
 				var smtpTransport = nodemailer.createTransport({
 					service: "gmail",
 					host: "smtp.gmail.com",
@@ -154,37 +155,47 @@ function postMessage(req, res){
 						res.end("sent");
 					}
 				});
+			} else {
+				console.log("returned false");
+				res.code = 401;
+
 			}
-		},insertPost);
-	}
+		});
+
+	});
+
 
 
 }
 
 function getMessages(req,res)
 {
-	var getMessages = "select * from Messages where senderEmail = '"+ req.session.username +"'";
-	console.log("Query is:"+getMessages);
-	mysql.fetchData(function(err,results){
-		if(err){
-			throw err;
-		}
-		else
-		{
-			if(results.length > 0)
-			{
-				var rows = results;
-				console.log("rows");
-				var jsonString = JSON.stringify(results);
-				var jsonParse = JSON.parse(jsonString);
-				console.log(jsonParse);
-				res.send(jsonParse);
 
+
+
+	mongo.connect(mongoURL, function(err, db){
+		var coll = mongo.collection('Messages');
+
+		coll.find({"senderEmail" : req.session.username}).toArray(function(err, user){
+			if (user)
+			{
+
+				console.log("********",user);
+				res.send(user);
+
+			} else {
+				console.log("returned false");
+				throw err;
+				res.code = 401;
 
 			}
-		}
+		});
 
-	},getMessages);
+
+	});
+
+
+
 }
 
 
