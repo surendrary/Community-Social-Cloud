@@ -70,7 +70,7 @@ function getPosts(req,res){
 			var jsonString = JSON.stringify(results);
 			var jsonParse = JSON.parse(jsonString);
 			
-			if(results.length > 0){
+
 				console.log("valid Login");
 				//res.render("Userhomepage");
 				console.log(jsonParse);
@@ -106,10 +106,7 @@ function getPosts(req,res){
 				}
 					
 			   
-			}
-			else{
-				res.render("failLogin");
-			}
+			
 		}
 		
 	},getPosts);

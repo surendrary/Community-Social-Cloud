@@ -62,7 +62,7 @@ function afterSignIn(req,res)
 							var jsonString = JSON.stringify(results);
 							var jsonParse = JSON.parse(jsonString);
 							
-							if(results.length > 0){
+
 								console.log("valid Login");
 								//res.render("Userhomepage");
 								console.log(jsonParse);
@@ -97,10 +97,8 @@ function afterSignIn(req,res)
                                 {
                                     res.render("adminHomepage");
                                 }
-						}
-							else{
-								res.render("failLogin");
-							}
+
+
 						}		
 							
 						},getPosts);
