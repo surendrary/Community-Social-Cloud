@@ -105,7 +105,7 @@
                                 <div>
                                     <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 452px;">
                                         <div class="message-list-wrapper" style="overflow: hidden; width: auto; height: 452px;">
-                                            <div class="message">MESSAGE BODY</div>
+                                            <div class="message" style="text-align: center">MESSAGE BODY</div>
 
                                             <ul class="message-list">
 
@@ -242,6 +242,33 @@
     $("#cancel").click(function() {
 
         modal.style.display = "none";
+        $.ajax({
+            type: "GET",
+            url: "/getMessages",
+            success: function(result) {
+                /* var trHTML = '';*/
+
+                var divHtml='';
+
+                response = result;
+
+                for(i in result) {
+
+                    divHtml+='<li class="new" id='+i+' onclick="getli('+i+')"><span class="avatar available"><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" class="img-circle"></span> <div class="body"><div class="header"><span class="username">'+result[i].recieverEmail +'</span></div><p>'+result[i].msgSubject+'</p></div></li>'
+                }
+                $('#list').html(divHtml);
+                $('#msgBody').html(response[0].msgBody);
+
+
+            },
+            error: function(result) {
+                alert('error');
+            }
+        });
+
+
+
+
     });
     $("#close").click(function() {
         modal.style.display = "none";
