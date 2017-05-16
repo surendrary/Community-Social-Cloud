@@ -67,7 +67,7 @@ function afterSignIn(req,res)
 								//res.render("Userhomepage");
 								console.log(jsonParse);
 								if(req.param("inputLoginAs") == 2) {
-								ejs.renderFile('./views/Userhomepage.ejs',{data:jsonParse},function(err, result) {
+								ejs.renderFile('./views/Userhomepage.ejs',{data:jsonParse,username:req.session.userfullname},function(err, result) {
 							        // render on success
 							        if (!err) {
 							            res.end(result);
@@ -81,7 +81,7 @@ function afterSignIn(req,res)
 							}
 							else if(req.param("inputLoginAs") == 1)
 							{
-								ejs.renderFile('./views/moderatorHomepage.ejs',{data:jsonParse},function(err, result) {
+								ejs.renderFile('./views/moderatorHomepage.ejs',{data:jsonParse,username:req.session.userfullname},function(err, result) {
 							        // render on success
 							        if (!err) {
 							            res.end(result);
@@ -277,7 +277,7 @@ exports.logout = function(req,res)
 exports.message = function(req,res)
 {
 
-	res.render("message");
+	res.render("message",{username:req.session.userfullname});
 };
 
 
