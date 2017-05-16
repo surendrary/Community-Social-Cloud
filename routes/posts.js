@@ -47,7 +47,7 @@ function addComment(req, res){
 						var json_responses = {
 							"statusCode" : 200
 						}
-						res.send(json_responses);
+						res.redirect('/getPosts');
 						
 					}
 				},updatePosts);
@@ -106,7 +106,7 @@ function getPosts(req,res){
 				}
 					
 			   
-			
+
 		}
 		
 	},getPosts);

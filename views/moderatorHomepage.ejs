@@ -121,9 +121,11 @@
                                     </div>
                                     <div class="post-footer">
                                         <div class="input-group">
-                                            <input class="form-control" placeholder="Add a comment" type="text">
-                                            <span class="input-group-addon">
-                                                <a href="#"><i class="fa fa-edit"></i></a>
+                                            <input class="form-control" placeholder="Add a comment" type="text" id=<%=data[i].ID%> />
+                                            <span class="input-group-addon" onclick="postComment(<%=data[i].ID%>)">
+                            				    <a href="#">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
                                             </span>
                                         </div>
                                         
@@ -236,6 +238,7 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/nivo-lightbox.min.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/user.js"></script>
 
 </body>
 

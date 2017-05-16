@@ -11,7 +11,7 @@ function postComment(postId) {
             postId : postId
         },
         success: function(result) {
-            alert(result);
+           // alert(result);
         },
         error: function(result) {
             alert('error');
