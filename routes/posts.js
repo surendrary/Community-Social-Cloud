@@ -70,18 +70,37 @@ function getPosts(req,res){
 				console.log("valid Login");
 				//res.render("Userhomepage");
 				console.log(jsonParse);
-				/*ejs.renderFile('./views/Userhomepage.ejs',{data:jsonParse},function(err, result) {
-			        // render on success
-			        if (!err) {
-			            res.end(result);
-			        }
-			        // render or error
-			        else {
-			            res.end('An error occurred');
-			            console.log(err);
-			        }
-				});*/
-				res.render("Userhomepage",{data:jsonParse});
+				
+				//#######################################
+				if(req.session.loginType == 2 || req.session.loginType == 0) {
+					console.log(req.param("inputLoginAs"));
+					ejs.renderFile('./views/Userhomepage.ejs',{data:jsonParse},function(err, result) {
+				        // render on success
+				        if (!err) {
+				            res.end(result);
+				        }
+				        // render or error
+				        else {
+				            res.end('An error occurred');
+				            console.log(err);
+				        }
+					});
+				}
+				else if(req.session.loginType == 1)
+				{
+					ejs.renderFile('./views/moderatorHomepage.ejs',{data:jsonParse},function(err, result) {
+				        // render on success
+				        if (!err) {
+				            res.end(result);
+				        }
+				        // render or error
+				        else {
+				            res.end('An error occurred');
+				            console.log(err);
+				        }
+					});	
+				}
+					
 			   
 			}
 			else{
@@ -93,6 +112,7 @@ function getPosts(req,res){
 	
 	
 }
+
 
 function postMessage(req, res){
 	console.log("************REQ:",req.session.username);
@@ -137,6 +157,8 @@ function postMessage(req, res){
 			}
 		},insertPost);
 	}
+
+
 }
 
 function getMessages(req,res)
