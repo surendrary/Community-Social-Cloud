@@ -230,6 +230,43 @@ function getUsers(req,res)
 }
 
 
+function getPostcomments(req,res)
+{
+	var getPostcommentscount = "select ID, noOfComments from posts order by noOfComments DESC"
+	console.log("Query is:"+getPostcommentscount);
+	mysql.fetchData(function(err,results){
+		if(err){
+			throw err;
+		}
+		else
+		{
+			if(results.length > 0)
+			{
+				var rows = results;
+				console.log("rows");
+				var jsonString = JSON.stringify(results);
+				var jsonParse = JSON.parse(jsonString);
+				console.log(jsonParse);
+				res.send(jsonParse);
+				/*ejs.renderFile('./views/adminHomepage.ejs',{data:jsonParse},function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});*/
+
+			}
+		}
+
+	},getPostcommentscount);
+}
+
+
 
 
 exports.logout = function(req,res)
@@ -251,5 +288,6 @@ exports.message = function(req,res)
 exports.getModerators= getModerators;
 exports.afterRegister=afterRegister;
 exports.getUsers = getUsers;
+exports.getPostcomments = getPostcomments;
 exports.signin=signin;
 exports.afterSignIn=afterSignIn;

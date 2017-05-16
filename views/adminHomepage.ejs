@@ -287,7 +287,8 @@ font-size: 16px;">  <a id="logout" href="#" class="btn btn-danger square-btn-adj
     var btn = document.getElementById("myBtn");
     var btn1 = document.getElementById("myBtn1");
     var btn2 = document.getElementById("myBtn2");
-    var list=[];
+    var post=[];
+    var comments=[]
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
     var span1 = document.getElementsByClassName("close")[1];
@@ -302,9 +303,9 @@ function myContainer() {
     var y = document.getElementById('container1');
     x.style.display = 'block';
     y.style.display = 'none';    
- }
+ } 
  
- function myContainer1() {
+  function myContainer1() {
     var a = document.getElementById('container1');
     var b = document.getElementById('container');
     a.style.display = 'block';
@@ -341,57 +342,7 @@ function myContainer() {
         });
     });
 
-	$("#bar").click(function() {
-        
-        modal2.style.display = "block";
-		myContainer1();
-        $.ajax({
-            type: "GET",
-            url: "/getUsers",
-            success: function (result) {
-                modal2.style.display = "block";
-                
-                Highcharts.chart('container1', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Stacked column chart'
-    },
-    xAxis: {
-        categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Total fruit consumption'
-        }
-    },
-    tooltip: {
-        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-        shared: true
-    },
-    plotOptions: {
-        column: {
-            stacking: 'percent'
-        }
-    },
-    series: [{
-        name: 'Comments',
-        data: [5, 3, 4, 7, 2]
-    }, {
-        name: 'Post',
-        data: [2, 2, 3, 2, 1]
-    }]
-});
-
-            }
-
-        });
-
-    });
-
-
+	
 
     btn2.onclick = function() {
         
@@ -468,6 +419,66 @@ function myContainer() {
         });
 
     }
+
+
+$("#bar").click(function() {
+        
+        modal2.style.display = "block";
+		myContainer1();
+        $.ajax({
+            type: "GET",
+            url: "/getPostcomments",
+            success: function (res) {
+            	 modal2.style.display = "block";
+                console.log(res[0].ID);
+                for (i=0; i< res.length; i++){
+                posts = res;
+                
+                }
+                console.log(posts[0].noOfComments);
+                
+                
+                
+                Highcharts.chart('container1', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Most famous posts'
+    },
+    xAxis: {
+        categories: result
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'No. of comments per post'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'posts',
+        data: [posts[0].ID, posts[1].ID, posts[2].ID, posts[3].ID, posts[4].ID]
+    }, {
+        name: 'Comments',
+        data: [posts[0].noOfComments, posts[1].noOfComments, posts[2].noOfComments, posts[3].noOfComments, posts[4].noOfComments]
+    }]
+});
+
+            }
+
+        });
+
+    });
+
 
        
 	

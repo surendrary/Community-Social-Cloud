@@ -49,6 +49,7 @@ app.get('/logout',home.logout);
 app.get('/message',home.message);
 app.post('/sendMessage',posts.postMessage);
 app.get('/getMessages',posts.getMessages);
+app.get('/getPostcomments', home.getPostcomments);
 
 
 http.createServer(app).listen(app.get('port'), function(){
