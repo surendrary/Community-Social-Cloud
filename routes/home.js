@@ -4,7 +4,7 @@ var mysql = require('./mysql');
 
 function signin(req,res) {
 
-	ejs.renderFile('views/index.ejs',function(err, result) {
+	ejs.renderFile('./CommunitySocialCloud/views/index.ejs',function(err, result) {
 	   if (!err) {
 	            res.end(result);
 	   }
