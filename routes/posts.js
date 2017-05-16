@@ -22,7 +22,7 @@ function addPost(req, res){
 				var json_responses = {
 					"statusCode" : 200
 				}
-				res.render("moderatorHomepage");
+				res.redirect('/getPosts');
 			}
 		},insertPost);
 	}
