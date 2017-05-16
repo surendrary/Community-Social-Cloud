@@ -65,6 +65,86 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/js/jquery.nicescroll.min.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-white border-top-green">
+                    <div class="panel-body chat">
+                        <div class="row chat-wrapper">
+                            <div class="col-md-4">
+
+                                <div class="compose-area">
+
+                                    <a href="javascript:void(0);" id="msgnew" class="btn btn-primary"><i class="fa fa-edit"></i> New Messages</a>
+                                </div>
+
+                                <div>
+                                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 550px;">
+                                        <div class="chat-list-wrapper" style="overflow-y: auto; width: auto; height: 550px;">
+                                            <ul class="chat-list" id="list">
+
+                                            </ul>
+                                        </div><div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 478.639px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-8" >
+                                <div>
+                                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 452px;">
+                                        <div class="message-list-wrapper" style="overflow: hidden; width: auto; height: 452px;">
+                                            <div class="message">MESSAGE BODY</div>
+
+                                            <ul class="message-list">
+
+                                                <li class="center-block"  >
+                                                     <div class="body">
+                                                        <div class="message well well-sm" id="msgBody">
+
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="slimScrollBar" style="width: 7px; position: absolute; top: 265px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 187.092px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- /.modal compose message -->
     <div class="modal"  id="modalCompose">
         <div class="modal-dialog">
@@ -111,10 +191,52 @@
         });
     });
     var modal=document.getElementById('modalCompose');
+    var response;
 
     $( document ).ready(function() {
-        modal.style.display = "block";
+       // modal.style.display = "block";
+        $.ajax({
+            type: "GET",
+            url: "/getMessages",
+            success: function(result) {
+               /* var trHTML = '';*/
+
+               var divHtml='';
+
+                response = result;
+
+                for(i in result) {
+
+                 divHtml+='<li class="new" id='+i+' onclick="getli('+i+')"><span class="avatar available"><img src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar" class="img-circle"></span> <div class="body"><div class="header"><span class="username">'+result[i].recieverEmail +'</span></div><p>'+result[i].msgSubject+'</p></div></li>'
+       }
+                $('#list').html(divHtml);
+                $('#msgBody').html(response[0].msgBody);
+
+
+            },
+            error: function(result) {
+                alert('error');
+            }
+        });
+
+
     });
+
+
+    function getli(i)
+    {
+
+        $('#msgBody').html(response[i].msgBody);
+    }
+
+
+ /*   $("#list").click(function() {
+              alert("HI"); // gets innerHTML of clicked li
+
+    });
+*/
+
+
 
 
     $("#cancel").click(function() {
@@ -123,6 +245,9 @@
     });
     $("#close").click(function() {
         modal.style.display = "none";
+    });
+    $("#msgnew").click(function() {
+        modal.style.display = "block";
     });
 
     $("#send").click(function() {
@@ -156,6 +281,8 @@
             }
         });
     });
+
+    $
 
 
 </script>

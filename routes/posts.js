@@ -139,7 +139,31 @@ function postMessage(req, res){
 	}
 }
 
+function getMessages(req,res)
+{
+	var getMessages = "select * from Messages where senderEmail = '"+ req.session.username +"'";
+	console.log("Query is:"+getMessages);
+	mysql.fetchData(function(err,results){
+		if(err){
+			throw err;
+		}
+		else
+		{
+			if(results.length > 0)
+			{
+				var rows = results;
+				console.log("rows");
+				var jsonString = JSON.stringify(results);
+				var jsonParse = JSON.parse(jsonString);
+				console.log(jsonParse);
+				res.send(jsonParse);
 
+
+			}
+		}
+
+	},getMessages);
+}
 
 
 
@@ -148,3 +172,4 @@ exports.addPost = addPost;
 exports.addComment = addComment;
 exports.getPosts = getPosts;
 exports.postMessage = postMessage;
+exports.getMessages = getMessages;
