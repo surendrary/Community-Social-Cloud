@@ -132,7 +132,7 @@ function postMessage(req, res)
 					host: "smtp.gmail.com",
 					auth: {
 						user: "testmyouth@gmail.com",
-						pass: "Testouth1@"
+						pass: "Testouth1@2"
 					}
 				});
 
